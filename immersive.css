@@ -1,0 +1,82 @@
+/* Light and depth follow the materials; scrolling and text keep their natural geometry. */
+.cover-stage{--glass-light-x:50%;--glass-light-y:40%;--brass-light-angle:90deg}
+.glass-front:after{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at var(--glass-light-x) var(--glass-light-y),#fffce9b3 0%,#fff7d52b 24%,transparent 58%);mix-blend-mode:screen;opacity:.5;z-index:1}
+.glass-edge:after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(var(--brass-light-angle),transparent 12%,#fff0bc66 44%,#fff4c18c 49%,transparent 66%);opacity:.45}
+.opening-projection{position:absolute;left:-8%;right:-8%;top:-4%;height:105dvh;z-index:4;pointer-events:none;background:linear-gradient(#a67f3e10,#9a774e55),url('assets/floral-glass.webp') center/100% 100%;filter:blur(5px) saturate(.35);mix-blend-mode:multiply;opacity:var(--opening-cast,0);transform:translateX(var(--cast-x,0px)) rotate(var(--cast-angle,0deg));transform-origin:center;will-change:opacity,transform}
+.is-open .opening-projection{display:none}
+.is-opening .right-leaf .seal{animation:stampTouch .42s cubic-bezier(.2,.7,.2,1)}
+@keyframes stampTouch{0%,100%{transform:translate(-50%,-50%) translateZ(calc(var(--half-depth) + 2px)) scale(1)}45%{transform:translate(-50%,-50%) translateZ(calc(var(--half-depth) + 1px)) scale(.97)}}
+.is-opening.is-unveiling.editorial-motion .welcome .text-pop{opacity:1;transform:none;transition:opacity .9s ease var(--reveal-delay,0s),transform 1.2s cubic-bezier(.16,.8,.25,1) var(--reveal-delay,0s)}
+
+.floral-depth{position:absolute;inset:0;pointer-events:none;transition:transform .18s linear}
+.floral-back{transform:translate3d(0,var(--floral-back-y,0px),0);opacity:.86}
+.floral-front{transform:translate3d(0,var(--floral-front-y,0px),0)}
+.floral-front .floral-bouquet{filter:drop-shadow(0 6px 7px #5b4d2b14)}
+
+/* A single quiet composition stays readable while the photographs reveal. */
+.cinematic{height:205svh;padding:0 22px!important;overflow:visible;min-height:0}
+.cinematic-scene{position:sticky;top:max(96px,calc((100svh - min(76svh,820px))/2));height:min(76svh,820px);min-height:0;max-height:none;clip-path:none;border-radius:3px;overflow:hidden;background:#344337}
+.cinematic-slides{position:absolute;inset:0;overflow:hidden;background:#344337}
+.cinema-slide{opacity:1;clip-path:inset(0 0 0 100%);transform:none;object-position:center 66%;transition:none;will-change:clip-path}
+.cinema-slide:first-child{opacity:1;clip-path:none;object-position:center 48%}
+.cinema-slide:nth-child(2){object-position:center 55%}
+.cinematic-shade{background:linear-gradient(180deg,#10251c08 35%,#10251c40 60%,#10251cbf 100%)}
+.cinematic-type{top:auto;bottom:8%;left:20px;right:20px;opacity:1;pointer-events:none}
+.cinematic-type .cinematic-names{font-size:clamp(66px,8vw,110px);margin:0;line-height:1.15}
+.cinematic-rule{margin:15px auto}
+.cinematic-location{font-size:10px;letter-spacing:2px;margin:0}
+.falling-flowers{position:fixed;inset:0;overflow:hidden;pointer-events:none!important;z-index:8;opacity:0;transition:opacity .7s}
+.is-open .falling-flowers{opacity:1}
+body:has(dialog[open]) .falling-flowers{opacity:0}
+.falling-flower{position:absolute;top:0;left:0;display:block;pointer-events:none;color:#c88795;filter:drop-shadow(0 2px 2px #66334855);will-change:transform}
+.falling-flower:nth-child(3n+2){color:#b97688}
+.whole-blossom svg{width:100%;height:100%;display:block}
+.rose-petal{border-radius:80% 20% 65% 35%;background:radial-gradient(ellipse at 30% 25%,#edb6bb,#bb6d7d 65%,#8f455b);border:1px solid #91465c99}
+
+.venue-location{font-size:22px;color:#6a705b;margin:22px 0 4px}
+.venue-explorer{margin:15px auto 0;max-width:800px}
+.venue-map{position:relative;margin:10px 0 0;isolation:isolate}
+.venue-map .venue-art{width:100%;max-width:none;margin:0;display:block}
+.venue-pins{position:absolute;inset:0}
+.venue-pin{position:absolute;transform:translate(-50%,-50%);padding:0;display:flex;flex-direction:column;align-items:center;gap:8px;min-width:110px;z-index:2;color:#384634}
+.venue-pin>span{display:flex;flex-direction:column;align-items:center;justify-content:center;place-items:center;position:relative;width:54px;height:54px;border:1px solid #b4955b;border-radius:50%;background:#fcf7e9ed;box-shadow:0 3px 8px #493a2726;font:12px var(--sans);transition:background .3s,color .3s,box-shadow .3s}
+.venue-pin>span small{display:block;font:8px/1 var(--sans);margin-top:3px;letter-spacing:.7px}
+.venue-pin>span:before{content:"";position:absolute;inset:-5px;border:1px solid #cbb57880;border-radius:50%;transition:inset .3s}
+.venue-pin>b{font:12px/1.4 var(--sans);font-weight:400;white-space:nowrap;background:#fcf7e9ed;border:1px solid #baa77980;padding:4px 8px}
+.venue-pin[aria-selected=true]>span{background:#46513b;color:#fff5db;box-shadow:0 0 0 4px #f9efcf99,0 4px 10px #493a273d}
+.venue-pin:hover>span:before{inset:-8px}
+.pin-garden{left:25%;top:59%}.pin-conservatory{left:52%;top:36%}.pin-arrival{left:79%;top:79%}
+.venue-hint{font:11px/1.7 var(--sans);letter-spacing:.3px;color:#7b775e;margin:15px 0 20px}
+.venue-notes{border:1px solid #b49b6c77;background:#faf4e8cf;outline:1px solid #cbb88a40;outline-offset:-6px;text-align:left;padding:27px 30px;min-height:190px}
+.venue-detail{display:block;width:100%;min-width:0}.venue-detail>div{width:100%;min-width:0}.venue-detail[hidden]{display:none!important}
+.venue-detail .small-caps{font-size:10px;letter-spacing:1.5px;color:#8d7451}.venue-detail h3{font-size:32px;margin:10px 0 12px}
+.venue-detail p{font-size:19px;line-height:1.55;margin:0;color:#69705b}.venue-detail .text-link{font-size:11px;margin:13px 0 0}
+.venue-detail:focus-visible{outline:2px solid #ad8c51;outline-offset:7px}
+
+.photo-gallery .picture-frame{transform:perspective(1000px) rotateX(var(--frame-rx,0deg)) rotateY(var(--frame-ry,0deg));transition:transform .45s cubic-bezier(.2,.7,.2,1),box-shadow .45s;transform-style:preserve-3d}
+.photo-gallery button:hover .picture-frame,.photo-gallery button:focus-visible .picture-frame{box-shadow:inset 0 0 0 1px #8d734f99,inset 0 0 0 3px #fff9,3px 7px 9px #5b43282b,0 20px 28px #4e3f2830}
+.frame-light{position:absolute;inset:0;z-index:5;pointer-events:none;background:linear-gradient(115deg,transparent 20%,#fff7 48%,transparent 68%);background-position:var(--frame-light-x,50%) center;background-size:200% 100%;opacity:0;transition:opacity .4s}
+.photo-gallery button:hover .frame-light{opacity:.16}
+.gallery-dialog{padding:36px 58px 17px;max-height:calc(100dvh - 24px);overflow:hidden;box-shadow:0 18px 90px #0d211b80;background:#f7f0df}
+.gallery-dialog::backdrop{background:#15251de0;backdrop-filter:blur(10px)}
+.album-stage{position:relative;height:min(65dvh,620px);width:100%;display:grid;place-items:center;isolation:isolate;touch-action:pan-y pinch-zoom}
+.gallery-dialog .album-stage img{position:absolute;width:auto;height:auto;max-height:100%;max-width:100%;margin:0;object-fit:contain;box-shadow:0 8px 20px #3f342540;will-change:opacity,transform}
+.album-outgoing{z-index:2;pointer-events:none}.album-outgoing[hidden]{display:none!important}
+.gallery-dialog #gallery-image{z-index:1}
+.gallery-dialog #gallery-caption{font-size:19px;line-height:1.3;margin:15px 0 10px}
+.album-footer{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #b69a6166;padding-top:12px;font:10px/1.5 var(--sans);letter-spacing:.5px;color:#7e7157}
+html:has(dialog[open]){overflow:hidden}
+
+.rsvp,.farewell{--evening:0;background-color:rgba(220,170,105,calc(var(--evening)*.14));background-image:radial-gradient(ellipse at 80% 25%,rgba(232,183,115,calc(var(--evening)*.15)),transparent 65%);transition:background-color .3s linear}
+.farewell{background-image:radial-gradient(ellipse at 50% 75%,rgba(224,166,99,calc(var(--evening)*.24)),transparent 65%),linear-gradient(180deg,transparent,rgba(202,153,101,calc(var(--evening)*.16)))}
+.farewell .closing-monogram{filter:drop-shadow(0 1px 0 #fff7dc)}
+.rsvp .primary{box-shadow:0 3px 0 #b7976540;transition:background .3s,box-shadow .3s,transform .3s}.rsvp .primary:hover{transform:translateY(-2px);box-shadow:0 5px 0 #b7976540}
+@media(max-width:700px){
+ .cinematic{height:195svh;padding-inline:9px!important}.cinematic-scene{height:74svh;min-height:0;max-height:none;top:max(82px,13svh)}.cinematic-type{bottom:8%}.cinematic-type .cinematic-names{font-size:76px}.cinematic-location{font-size:10px;letter-spacing:1px}.falling-flower:nth-child(n+7){display:none}
+
+ .venue-location{font-size:19px;margin-top:20px}.venue-explorer{margin-top:20px}.venue-map{width:calc(100% + 30px);margin-inline:-15px}.venue-map .venue-art{width:100%;margin:0}.venue-pin{min-width:75px;gap:6px}.venue-pin>span{width:50px;height:50px;font-size:12px}.venue-pin>b{font-size:10px;padding:3px 5px}.venue-hint{font-size:11px;margin-top:12px}.venue-notes{padding:24px 21px;min-height:250px}.venue-detail{display:block}.venue-detail .small-caps{font-size:10px;letter-spacing:1px}.venue-detail h3{font-size:28px}.venue-detail p{font-size:18px}
+ .gallery-dialog{width:calc(100% - 20px);padding:38px 35px 16px}.album-stage{height:min(63dvh,580px)}.gallery-dialog .album-stage img{padding:7px;border-width:5px}.gallery-dialog #gallery-caption{font-size:16px}.album-footer{font-size:9px;gap:10px;letter-spacing:0}.gallery-dialog>button:not(.dialog-close){padding:5px;font-size:24px}
+}
+@media(prefers-reduced-motion:reduce){
+ .falling-flowers{display:none!important}.cinematic{height:auto;padding-block:20px!important}.cinematic-scene{position:relative;top:auto}.glass-front:after,.glass-edge:after,.opening-projection{display:none}.is-opening .right-leaf .seal{animation:none!important}.floral-depth{transform:none!important;transition:none!important}.photo-gallery .picture-frame{transform:none!important;transition:none!important}.frame-light{display:none}.cinema-slide{transform:none!important;transition:none!important;opacity:0!important}.cinema-slide:last-child{opacity:1!important;clip-path:none!important}.cinematic-messages p{opacity:0!important;transition:none!important}.cinematic-messages p:last-child{opacity:1!important}.cinema-steps{display:none}.rsvp,.farewell{--evening:1!important;transition:none!important}
+}

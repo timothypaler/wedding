@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//InviLinks//Rose and Light Concept//EN
+BEGIN:VEVENT
+UID:rose-and-light-concept@invilinks.example
+DTSTAMP:20261028T000000Z
+DTSTART:20270620T073000Z
+DTEND:20270620T130000Z
+SUMMARY:Isla and Theo — Wedding Concept
+LOCATION:The Glasshouse Garden, Tagaytay (illustrative venue)
+DESCRIPTION:Illustrative wedding invitation sample by InviLinks. This is not a real event booking.
+STATUS:TENTATIVE
+END:VEVENT
+END:VCALENDAR

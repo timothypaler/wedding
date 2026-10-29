@@ -1,0 +1,18 @@
+ISLA & THEO — ROSE & LIGHT
+Latest source export: 29 October 2026
+
+Upload-ready static website. index.html is directly at the root of this ZIP.
+
+1. Extract this ZIP.
+2. Upload all extracted files and folders together to your static hosting.
+3. Keep assets/ beside index.html, app.js, motion.js, immersive.js and the CSS files.
+
+No build command or installation is required. For a Git deployment, commit the extracted contents at the repository root and publish that directory.
+
+Local preview: run python3 -m http.server 8000 in the extracted folder, then open http://localhost:8000.
+
+Includes the brass-edged glass opening, right-panel monogram, wedding music, photo transitions, falling flowers, and the corrected mobile venue panels. Music starts with the opening-seal tap and has a play/pause control.
+
+This remains a sample invitation. RSVP replies are saved only in the visitor's browser; no host or database receives them. Venue and event details are illustrative. Photo and font credits/licenses are included in assets/ and the invitation credits.
+
+README.md retains project implementation notes; its dist/ paths refer to the original project layout. This export is flattened so you can upload it directly.
